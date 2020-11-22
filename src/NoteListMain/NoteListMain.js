@@ -1,15 +1,23 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import { Link } from 'react-router-dom'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import Note from '../Note/Note'
 import CircleButton from '../CircleButton/CircleButton'
 import './NoteListMain.css'
+import AppContext from '../AppContext'
+import {getNotesForFolder} from '../notes-helpers';
 
 export default function NoteListMain(props) {
+  const context = useContext(AppContext)
+  const {folderId} = props.match.params;
+  const notes = getNotesForFolder(
+      context.notes,
+      folderId
+  );
   return (
     <section className='NoteListMain'>
       <ul>
-        {props.notes.map(note =>
+        {notes.map(note =>
           <li key={note.id}>
             <Note
               id={note.id}
