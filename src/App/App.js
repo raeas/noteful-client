@@ -16,22 +16,22 @@ class App extends Component {
 
     // use async in front of componentDidMount() to use "await" below
     // async 
-    componentDidMount() {
-      fetch('http://localhost:9090/folders')
-        .then(res => res.json())
-        .then(folders => this.setState({folders}))
-      fetch('http://localhost:9090/notes')
-        .then(res => res.json())
-        .then(notes => this.setState({notes}))
-        // let folderRes = await fetch('http://localhost:9090/folders')
-        // let folders = await folderRes.json()
-        // let noteRes = await fetch('http://localhost:9090/notes')
-        // let notes = await noteRes.json()
-        // this.setState({folders, notes})
+    async componentDidMount() {
+      // fetch('http://localhost:9090/folders')
+      //   .then(res => res.json())
+      //   .then(folders => this.setState({folders}))
+      // fetch('http://localhost:9090/notes')
+      //   .then(res => res.json())
+      //   .then(notes => this.setState({notes}))
+        let folderRes = await fetch('http://localhost:9090/folders')
+        let folders = await folderRes.json()
+        let noteRes = await fetch('http://localhost:9090/notes')
+        let notes = await noteRes.json()
+        this.setState({folders, notes})
 
     }
 
-    handleDeleteNote = (noteId) => {
+    deleteNote = (noteId) => {
       this.setState({
         notes: this.state.notes.filter(note => note.id !== noteId)
       })

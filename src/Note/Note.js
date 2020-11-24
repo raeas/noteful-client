@@ -6,6 +6,8 @@ import './Note.css'
 import AppContext from '../AppContext'
 
 export default function Note(props) {
+
+  console.log({props})
   
   const context = useContext(AppContext)
 
@@ -13,9 +15,11 @@ export default function Note(props) {
     onDeleteNote: () => {}
   }
 
-  handleClickDelete = e => {
+  const handleClickDelete = e => {
     e.preventDefault()
-    const noteId = this.props.id
+    const noteId = props.id
+    console.log(noteId)
+
 
   fetch(`http://localhost:9090/notes/${noteId}` , {
     method: 'DELETE', 
@@ -23,14 +27,10 @@ export default function Note(props) {
       'content-type': 'application/json'
     },
   })
-    .then( res => {
-      if (!res.ok)
-        return res.json().then(e => Promise.reject(e))
-      return res.json()
-    })
     .then(() => {
-      this.context.deleteNote(noteId)
-      this.props.onDeleteNote(noteId)
+      context.deleteNote(noteId)
+      console.log('deleteNote')
+      props.onDeleteNote()
     })
     .catch(error => {
       console.error({ error })
@@ -44,7 +44,7 @@ export default function Note(props) {
           {props.name}
         </Link>
       </h2>
-      <button className='Note__delete' type='button' onClick={() => context.deleteNote(props.id)}>
+      <button className='Note__delete' type='button' onClick={handleClickDelete}>
         <FontAwesomeIcon icon='trash-alt' />
         {' '}
         remove

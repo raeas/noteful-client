@@ -14,6 +14,11 @@ export default function NoteListMain(props) {
       context.notes,
       folderId
   );
+
+  const onDeleteNote = () => {
+    props.history.push(folderId)
+  }
+
   return (
     <section className='NoteListMain'>
       <ul>
@@ -23,6 +28,7 @@ export default function NoteListMain(props) {
               id={note.id}
               name={note.name}
               modified={note.modified}
+              onDeleteNote={onDeleteNote}
             />
           </li>
         )}
