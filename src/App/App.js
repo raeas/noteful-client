@@ -8,6 +8,7 @@ import NotePageMain from '../NotePageMain/NotePageMain';
 import AddFolder from '../AddFolder/AddFolder'
 import AddNote from '../AddNote/AddNote'
 import AppContext from '../AppContext'
+import NoteError from '../NoteError/NoteError'
 import './App.css';
 
 class App extends Component {
