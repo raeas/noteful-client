@@ -25,6 +25,11 @@ export default class AddFolder extends Component {
       },
       body: JSON.stringify(folder),
     })
+      .then(res => {
+        if (!res.ok)
+          return res.json().then(e => Promise.reject(e))
+        return res.json()
+      })
       .then(folder => {
         this.context.addFolder(folder)
         this.props.history.push(`/folder/${folder.id}`)
