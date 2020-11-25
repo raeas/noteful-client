@@ -40,14 +40,14 @@ class App extends Component {
       })
     }
 
-    // handleAddFolder = folder => {
-    //   this.setState({
-    //     folders: [
-    //       ...this.state.folders,
-    //       folder
-    //     ]
-    //   })
-    // }
+    handleAddFolder = folder => {
+      this.setState({
+        folders: [
+          ...this.state.folders,
+          folder
+        ]
+      })
+    }
 
     renderNavRoutes() {
         return (
