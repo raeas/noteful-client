@@ -7,7 +7,7 @@ import {findNote} from '../notes-helpers'
 export default function NotePageMain(props) {
   const context = useContext(AppContext)
   const {noteId} = props.match.params;
-  const note = findNote(context.notes, noteId);
+  const note = findNote(context.notes, noteId) || { content: '' };
   
   const onDeleteNote = () => {
     console.log('deleting')
