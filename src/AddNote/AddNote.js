@@ -3,7 +3,7 @@ import NotefulForm from '../NotefulForm/NotefulForm'
 import AppContext from '../AppContext'
 import './AddNote.css'
 
-export default class AddFolder extends Component {
+export default class AddNote extends Component {
   static defaultProps = {
     history: {
       push: () => { }
