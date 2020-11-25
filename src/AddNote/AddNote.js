@@ -28,6 +28,11 @@ export default class AddNote extends Component {
       },
       body: JSON.stringify(newNote),
     })
+      .then(res => {
+        if (!res.ok)
+          return res.json().then(e => Promise.reject(e))
+        return res.json()
+      })
       .then(note => {
         this.context.addNote(note)
         this.props.history.push(`/folder/${note.folderId}`)
