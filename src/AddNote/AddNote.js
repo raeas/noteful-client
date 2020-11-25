@@ -2,9 +2,11 @@ import React, { Component } from 'react'
 import NotefulForm from '../NotefulForm/NotefulForm'
 import AppContext from '../AppContext'
 import NoteError from '../NoteError/NoteError'
+import PropTypes from 'prop-types';
 import './AddNote.css'
 
 export default class AddNote extends Component {
+
   static defaultProps = {
     history: {
       push: () => { }
@@ -82,7 +84,6 @@ export default class AddNote extends Component {
             </div>
           </NotefulForm>
         </NoteError>
-
       </section>
     )
   }
