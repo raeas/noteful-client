@@ -4,10 +4,11 @@ import { format } from 'date-fns'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import './Note.css'
 import AppContext from '../AppContext'
+import PropTypes from 'prop-types';
 
 export default function Note(props) {
 
-  console.log({props})
+  console.log(props)
   
   const context = useContext(AppContext)
 
@@ -61,3 +62,10 @@ export default function Note(props) {
     </div>
   )
 }
+
+Note.propTypes = {
+  name: PropTypes.string.isRequired,
+  content: PropTypes.string.isRequired,
+  id: PropTypes.string.isRequired,
+  modified: PropTypes.string.isRequired
+};

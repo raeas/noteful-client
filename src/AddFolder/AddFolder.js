@@ -40,6 +40,7 @@ export default class AddFolder extends Component {
     }
 
   render(){
+    console.log(this.props)
     return (
       <section className='AddFolder'>
         <h2>Create a folder</h2>
@@ -47,6 +48,7 @@ export default class AddFolder extends Component {
           <div className='field'>
             <label htmlFor='folder-name-input'>
               Name
+              <p>{this.validateFolderName}</p>
             </label>
             <input type='text' id='folder-name-input' name='folder-name' />
           </div>
