@@ -55,15 +55,23 @@ export default class AddNote extends Component {
           <NotefulForm onSubmit={this.handleSubmit}>
             <div className='field'>
               <label htmlFor='note-name-input'>
-                Name
+                Name (required)
               </label>
-              <input type='text' id='note-name-input' name='note-name' />
+              <input 
+                type='text' 
+                id='note-name-input' 
+                name='note-name'
+                aria-label='Name of note'
+                aria-required='true' />
             </div>
             <div className='field'>
               <label htmlFor='note-content-input'>
                 Content
               </label>
-              <textarea id='note-cntent-input' name='note-content'/>
+              <textarea 
+                id='note-cntent-input' 
+                name='note-content'
+                aria-label='Text of note' />
             </div>
             <div className='field'>
               <label html='note-folder-select'>
