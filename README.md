@@ -14,7 +14,7 @@ This repo is an assignment for Thinkful's Software Engineering Flex program.
 
 ### Tech Stack
 * React.js
-* HTML
+* JSX
 * CSS
 * JavaScript
 
