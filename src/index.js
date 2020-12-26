@@ -1,3 +1,4 @@
+import dotenv from 'dotenv'
 import React from 'react'
 import ReactDOM from 'react-dom'
 import { library } from '@fortawesome/fontawesome-svg-core'
@@ -10,7 +11,7 @@ import './index.css'
 import App from './App/App'
 
 library.add(faPlus, faChevronLeft, faTrashAlt, faCheckDouble)
-
+dotenv.config()
 ReactDOM.render(
   <BrowserRouter>
     <App />

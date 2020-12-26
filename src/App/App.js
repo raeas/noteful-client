@@ -10,7 +10,6 @@ import AddNote from '../AddNote/AddNote'
 import UpdateNote from '../UpdateNote/UpdateNote'
 import AppContext from '../AppContext'
 import config from '../config'
-// import NoteError from '../NoteError/NoteError'
 import './App.css';
 
 class App extends Component {
@@ -20,44 +19,26 @@ class App extends Component {
     };
 
     async componentDidMount() {
-        let noteRes = await fetch(config.API_ENDPOINT `${notes}` , 
+        let noteRes = await fetch(config.API_ENDPOINT + 'notes', 
           {
           method: 'GET',
           headers: {
-            'authorization': `Bearer ${config.API_KEY}`
+            'content-type': 'application/json',
+            'Authorization': `Bearer ${config.API_KEY}`
           }
         })
         let notes = await noteRes.json()
-        let folderRes = await fetch(`http://localhost:8000/api/folders`, 
+        let folderRes = await fetch(config.API_ENDPOINT + 'folders', 
           {
           method: 'GET',
           headers: {
-            'authorization': `Bearer f77374c8-375b-11eb-adc1-0242ac120002`
+            'content-type': 'application/json',
+            'Authorization': `Bearer ${config.API_KEY}`
           }
         })
         let folders = await folderRes.json()
-        this.setState({folders, notes})
+        this.setState({notes, folders})
     }
-
-    async componentDidMount() {
-      let noteRes = await fetch(`http://localhost:8000/api/notes` , 
-        {
-        method: 'GET',
-        headers: {
-          'authorization': `Bearer f77374c8-375b-11eb-adc1-0242ac120002`
-        }
-      })
-      let notes = await noteRes.json()
-      let folderRes = await fetch(`http://localhost:8000/api/folders`, 
-        {
-        method: 'GET',
-        headers: {
-          'authorization': `Bearer f77374c8-375b-11eb-adc1-0242ac120002`
-        }
-      })
-      let folders = await folderRes.json()
-      this.setState({folders, notes})
-  }
 
     deleteNote = (noteId) => {
       console.log(noteId)
