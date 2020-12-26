@@ -4,34 +4,26 @@ import { format } from 'date-fns'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import './Note.css'
 import AppContext from '../AppContext'
-import PropTypes from 'prop-types';
+import config from '../config'
 
 export default function Note(props) {
-
-  // console.log(props)
   
   const context = useContext(AppContext)
-
-  // console.log(context)
-  // const defaultProps = {
-  //   onDeleteNote: () => {}
-  // }
 
   const handleClickDelete = e => {
     e.preventDefault()
     const noteId = props.id
     console.log(noteId)
 
-    fetch(`http://localhost:8000/notes/${noteId}` , {
+    fetch(config.API_ENDPOINT + 'notes/' + `${noteId}`, {
       method: 'DELETE', 
       headers: {
         'content-type': 'application/json',
-        'authorization': `Bearer f77374c8-375b-11eb-adc1-0242ac120002`
+        'Authorization': `Bearer ${config.API_KEY}`
       },
     })
     .then(() => {
       context.deleteNote(noteId)
-      // console.log('deleteNote')
       props.onDeleteNote()
     })
     .catch(error => {
@@ -63,10 +55,3 @@ export default function Note(props) {
     </div>
   )
 }
-
-// Note.propTypes = {
-//   name: PropTypes.string.isRequired,
-//   content: PropTypes.string.isRequired,
-//   id: PropTypes.string.isRequired,
-//   modified: PropTypes.string.isRequired
-// };

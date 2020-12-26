@@ -15,8 +15,6 @@ export default function NoteListMain(props) {
       folderId
   );
 
-  console.log(props.match.params)
-
   const onDeleteNote = () => {
     props.history.push(folderId)
   }

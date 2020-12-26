@@ -2,7 +2,6 @@ import React, { Component } from 'react'
 import NotefulForm from '../NotefulForm/NotefulForm'
 import AppContext from '../AppContext'
 import NoteError from '../NoteError/NoteError'
-import PropTypes from 'prop-types';
 import './UpdateNote.css'
 import config from '../config'
 
@@ -34,30 +33,6 @@ export default class AddNote extends Component {
       content: note.content,
       folder_id: note.folder_id
     })
-  
-    // fetch(`http://localhost:8000/api/notes` + `/${noteId}`, {
-    //   method: 'GET',
-    //   headers: {
-    //     'authorization': `Bearer f77374c8-375b-11eb-adc1-0242ac120002`
-    //   }
-    // })
-    //   .then(res => {
-    //     if (!res.ok)
-    //       return res.json().then(error => Promise.reject(error))
-
-    //     return res.json()
-    //   })
-    //   .then(responseData => {
-    //     this.setState({
-    //       name: responseData.name,
-    //       content: responseData.content,
-    //       folderId: responseData.folder_id
-    //     })
-    //   })
-    //   .catch(error => {
-    //     console.error(error)
-    //     this.setState({ error })
-    //   })
   }
 
   handleChange = e => {
@@ -77,20 +52,14 @@ export default class AddNote extends Component {
 
     
 
-    fetch(`http://localhost:8000/api/notes/${noteId}` , {
+    fetch(config.API_ENDPOINT + 'notes/' + `${noteId}`, {
       method: 'PATCH', 
       headers: {
         'content-type': 'application/json',
-        'authorization': `Bearer f77374c8-375b-11eb-adc1-0242ac120002`
+        'Authorization': `Bearer ${config.API_KEY}`
       },
       body: JSON.stringify(newNote),
     })
-      // .then(res => {
-      //   console.log(res)
-      //   if (!res.ok)
-      //     return res.json().then(e => Promise.reject(e))
-      //   return res.json()
-      // })
       .then(() => {
         this.context.updateNote(newNote)
         this.props.history.push(`/`)

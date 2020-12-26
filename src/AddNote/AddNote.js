@@ -47,7 +47,6 @@ export default class AddNote extends Component {
     }
 
   render(){
-    // console.log(this.props)
     const { folders=[] } = this.context
     return (
       <section className='AddNote'>
