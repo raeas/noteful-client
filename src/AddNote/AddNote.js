@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import NotefulForm from '../NotefulForm/NotefulForm'
 import AppContext from '../AppContext'
 import NoteError from '../NoteError/NoteError'
-// import PropTypes from 'prop-types';
+import config from '../config'
 import './AddNote.css'
 
 export default class AddNote extends Component {
@@ -24,11 +24,11 @@ export default class AddNote extends Component {
       modified: new Date(),
     }
 
-    fetch(`http://localhost:8000/api/notes` , {
+    fetch(config.API_ENDPOINT + 'notes', {
       method: 'POST',
       headers: {
         'content-type': 'application/json',
-        'authorization': `Bearer f77374c8-375b-11eb-adc1-0242ac120002`
+        'Authorization': `Bearer ${config.API_KEY}`
       }, 
       body: JSON.stringify(newNote),
     })
