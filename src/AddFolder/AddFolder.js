@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import NotefulForm from '../NotefulForm/NotefulForm'
 import AppContext from '../AppContext'
 import './AddFolder.css'
+import config from '../config'
 
 export default class AddFolder extends Component {
   static defaultProps = {
@@ -17,11 +18,11 @@ export default class AddFolder extends Component {
     const folder = {
       name: e.target['folder-name'].value
     }
-    fetch(`http://localhost:8000/api/folders` , {
+    fetch(config.API_ENDPOINT + 'folders', {
       method: 'POST',
       headers: {
         'content-type': 'application/json',
-        'authorization': `Bearer f77374c8-375b-11eb-adc1-0242ac120002`
+        'Authorization': `Bearer ${config.API_KEY}`
       }, 
       body: JSON.stringify(folder),
     })
