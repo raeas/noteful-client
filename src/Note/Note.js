@@ -8,26 +8,27 @@ import PropTypes from 'prop-types';
 
 export default function Note(props) {
 
-  console.log(props)
+  // console.log(props)
   
   const context = useContext(AppContext)
 
-  const defaultProps = {
-    onDeleteNote: () => {}
-  }
+  // console.log(context)
+  // const defaultProps = {
+  //   onDeleteNote: () => {}
+  // }
 
   const handleClickDelete = e => {
     e.preventDefault()
     const noteId = props.id
     console.log(noteId)
 
-
-  fetch(`http://localhost:9090/notes/${noteId}` , {
-    method: 'DELETE', 
-    headers: {
-      'content-type': 'application/json'
-    },
-  })
+    fetch(`http://localhost:8000/notes/${noteId}` , {
+      method: 'DELETE', 
+      headers: {
+        'content-type': 'application/json',
+        'authorization': `Bearer f77374c8-375b-11eb-adc1-0242ac120002`
+      },
+    })
     .then(() => {
       context.deleteNote(noteId)
       // console.log('deleteNote')
@@ -63,9 +64,9 @@ export default function Note(props) {
   )
 }
 
-Note.propTypes = {
-  name: PropTypes.string.isRequired,
-  content: PropTypes.string.isRequired,
-  id: PropTypes.string.isRequired,
-  modified: PropTypes.string.isRequired
-};
+// Note.propTypes = {
+//   name: PropTypes.string.isRequired,
+//   content: PropTypes.string.isRequired,
+//   id: PropTypes.string.isRequired,
+//   modified: PropTypes.string.isRequired
+// };

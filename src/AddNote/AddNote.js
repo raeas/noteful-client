@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import NotefulForm from '../NotefulForm/NotefulForm'
 import AppContext from '../AppContext'
 import NoteError from '../NoteError/NoteError'
-import PropTypes from 'prop-types';
+// import PropTypes from 'prop-types';
 import './AddNote.css'
 
 export default class AddNote extends Component {
@@ -20,15 +20,16 @@ export default class AddNote extends Component {
     const newNote = {
       name: e.target['note-name'].value,
       content: e.target['note-content'].value,
-      folderId: e.target['note-folder-id'].value,
+      folder_id: e.target['note-folder-id'].value,
       modified: new Date(),
     }
 
-    fetch(`http://localhost:9090/notes` , {
-      method: 'POST', 
+    fetch(`http://localhost:8000/api/notes` , {
+      method: 'POST',
       headers: {
-        'content-type': 'application/json'
-      },
+        'content-type': 'application/json',
+        'authorization': `Bearer f77374c8-375b-11eb-adc1-0242ac120002`
+      }, 
       body: JSON.stringify(newNote),
     })
       .then(res => {

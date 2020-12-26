@@ -7,8 +7,10 @@ import NoteListMain from '../NoteListMain/NoteListMain';
 import NotePageMain from '../NotePageMain/NotePageMain';
 import AddFolder from '../AddFolder/AddFolder'
 import AddNote from '../AddNote/AddNote'
+import UpdateNote from '../UpdateNote/UpdateNote'
 import AppContext from '../AppContext'
-import NoteError from '../NoteError/NoteError'
+import config from '../config'
+// import NoteError from '../NoteError/NoteError'
 import './App.css';
 
 class App extends Component {
@@ -18,12 +20,44 @@ class App extends Component {
     };
 
     async componentDidMount() {
-        let folderRes = await fetch('http://localhost:9090/folders')
-        let folders = await folderRes.json()
-        let noteRes = await fetch('http://localhost:9090/notes')
+        let noteRes = await fetch(config.API_ENDPOINT `${notes}` , 
+          {
+          method: 'GET',
+          headers: {
+            'authorization': `Bearer ${config.API_KEY}`
+          }
+        })
         let notes = await noteRes.json()
+        let folderRes = await fetch(`http://localhost:8000/api/folders`, 
+          {
+          method: 'GET',
+          headers: {
+            'authorization': `Bearer f77374c8-375b-11eb-adc1-0242ac120002`
+          }
+        })
+        let folders = await folderRes.json()
         this.setState({folders, notes})
     }
+
+    async componentDidMount() {
+      let noteRes = await fetch(`http://localhost:8000/api/notes` , 
+        {
+        method: 'GET',
+        headers: {
+          'authorization': `Bearer f77374c8-375b-11eb-adc1-0242ac120002`
+        }
+      })
+      let notes = await noteRes.json()
+      let folderRes = await fetch(`http://localhost:8000/api/folders`, 
+        {
+        method: 'GET',
+        headers: {
+          'authorization': `Bearer f77374c8-375b-11eb-adc1-0242ac120002`
+        }
+      })
+      let folders = await folderRes.json()
+      this.setState({folders, notes})
+  }
 
     deleteNote = (noteId) => {
       console.log(noteId)
@@ -50,6 +84,13 @@ class App extends Component {
       })
     }
 
+    updateNote = updatedNote => {
+      console.log(updatedNote)
+      this.setState({
+        notes: this.state.notes.map(note => note.id === updatedNote.id ? updatedNote : note)
+      }, () => console.log(this.state.notes))
+    }
+    
     renderNavRoutes() {
         return (
             <>
@@ -97,6 +138,10 @@ class App extends Component {
                   path='/add-note' 
                   component={AddNote} 
                 />
+                <Route
+                  path='/edit/:noteId'
+                  component={UpdateNote}
+                />
             </>
         );
     }
@@ -107,7 +152,8 @@ class App extends Component {
         notes: this.state.notes,
         deleteNote: this.deleteNote,
         addFolder: this.handleAddFolder,
-        addNote: this.handleAddNote
+        addNote: this.handleAddNote,
+        updateNote: this.updateNote
       }
         return (
           <AppContext.Provider value={value}>
